@@ -1,45 +1,12 @@
 using System;
 using System.Collections.ObjectModel;
 
-namespace Magnet_game
+namespace MagnetGame
 {
-    public struct Field
-    {
-        public enum FieldType
-        {
-            Empty,
-            Wall,
-            Hole,
-            Magnet
-
-        }
-        public FieldType FieldState;
-        public int MagnetStrength;
-        public bool MagnetPolarity;
-    }
-
-    public struct Player
-    {
-        public Position Position;
-        public bool Polarity;
-    }
-
-    public struct GameState
-    {
-        public string Visualize()
-        {
-            // TODO: Implement function
-            return null;
-        }
-        public Field[] Fields;
-        public Player Player;
-        public Level Level;
-    }
-
     public class Level
     {
         // TODO: Add Json Serialization
-        public ReadOnlyCollection<Field> Fields;
+        public ReadOnlyCollection<BoardField> Fields;
         public readonly int LevelWidth;
         public readonly int LevelHeight;
         public readonly Player StartingPlayer;
@@ -60,7 +27,7 @@ namespace Magnet_game
 
         public GameState ToState()
         {
-            var stateFields = new Field[Fields.Count]; 
+            var stateFields = new BoardField[Fields.Count]; 
             Fields.CopyTo(stateFields, 0);
             return new GameState{Fields = stateFields, Player = StartingPlayer, Level = this};
         }

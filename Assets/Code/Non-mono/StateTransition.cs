@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Magnet_game
+namespace MagnetGame
 {
     public struct StateTransition
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Magnet_game
+namespace MagnetGame
 {
     class Program
     {

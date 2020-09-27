@@ -1,4 +1,4 @@
-namespace Magnet_game
+namespace MagnetGame
 {
     public enum Action
     {
