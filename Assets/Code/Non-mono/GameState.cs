@@ -3,12 +3,6 @@ using System.Collections.ObjectModel;
 
 namespace MagnetGame
 {
-    public struct Player
-    {
-        public Position Position;
-        public bool Polarity;
-    }
-
     public struct GameState
     {
         public string Visualize()
