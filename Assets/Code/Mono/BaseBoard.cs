@@ -6,13 +6,8 @@ namespace MagnetGame
 {
     class BaseBoard: MonoBehaviour
     {
-
-        [SerializeField]
-        protected int _rows;
-        [SerializeField]
-        protected int _columns;
-        public int Rows => _rows;
-        public int Columns => _columns;
+        public int Rows => level != null ? level.LevelHeight : 0;
+        public int Columns => level != null ? level.LevelWidth : 0;
 
         [SerializeField]
         protected string levelString;
@@ -36,9 +31,12 @@ namespace MagnetGame
 
         public virtual void Setup()
         {
-            fields = new MonoField[_rows*_columns];
-            magnets = new List<MonoMagnet>();
-            InstantiateFields();
+            if(level != null)
+            {
+                fields = new MonoField[Rows*Columns];
+                magnets = new List<MonoMagnet>();
+                InstantiateFields();
+            }
         }
 
         public void SetLevel()
@@ -54,14 +52,14 @@ namespace MagnetGame
         protected virtual void InstantiateFields() 
         {
             Rect boardRect = ((RectTransform)transform).rect;
-            float fieldWidth = boardRect.width/_columns;
-            float fieldHeight = boardRect.height/_rows;
+            float fieldWidth = boardRect.width/Columns;
+            float fieldHeight = boardRect.height/Rows;
             Vector2 fieldDimensions = new Vector2(fieldWidth, fieldHeight);
             Vector2 fieldOriginPoint = (Vector2)transform.position - new Vector2(boardRect.width, boardRect.height)/2 + fieldDimensions/2;
             Transform fieldTransform = transform.Find("fields");
-            for (int y = 0; y < _rows; y++)
+            for (int y = 0; y < Rows; y++)
             {
-                for(int x = 0; x < _columns; x++)
+                for(int x = 0; x < Columns; x++)
                 {
                     //create the field and give it a descriptive name.
                     MonoField newfield = MonoField.Instantiate(configuration.fieldPrefab, fieldTransform);
@@ -74,8 +72,8 @@ namespace MagnetGame
                     fields[level.FieldIndex(x,y)].Setup(fieldDimensions, fieldPosition);
                     */
                     
-                    fields[y*_columns + x] = newfield;
-                    fields[y*_columns + x].Setup(fieldDimensions, fieldPosition);
+                    fields[y*Columns + x] = newfield;
+                    fields[y*Columns + x].Setup(fieldDimensions, fieldPosition);
                 }
             }
         }
@@ -107,9 +105,9 @@ namespace MagnetGame
                     }
                 }
 
-                EditorGUI.BeginDisabledGroup(myBoard.editMode);
-                myBoard._columns = EditorGUILayout.IntField("Columns", myBoard._columns);
-                myBoard._rows = EditorGUILayout.IntField("Rows", myBoard._rows);
+                EditorGUI.BeginDisabledGroup(true);
+                EditorGUILayout.IntField("Columns", myBoard.Columns);
+                EditorGUILayout.IntField("Rows", myBoard.Rows);
                 EditorGUI.EndDisabledGroup();
 
                 myBoard.configuration = (BoardConfiguration)EditorGUILayout.ObjectField("Configuration", myBoard.configuration, typeof(BoardConfiguration), true);

@@ -44,12 +44,14 @@ namespace MagnetGame
         public string Visualize(bool richText = false)
         {
             string visualization = "";
+            int trueY = 0;
             for(int y = 0; y < LevelHeight + LevelWidth; y++)
             {
                 if(y == LevelHeight + LevelWidth - 1)
                 {
                     break;
                 }
+                int trueX = 0;
                 for(int x = 0; x < LevelWidth + LevelHeight; x++)
                 {
                     string nextBit = "!";
@@ -67,8 +69,9 @@ namespace MagnetGame
                     }
                     else
                     {
+                        Debug.Log("X " + trueX + ", Y " + trueY);
                         // TODO: This only works for even x and y. Fix this.
-                        var field = Fields[FieldIndex(x/2, y/2)];
+                        var field = Fields[FieldIndex(trueX, trueY)];
                         if (field.FieldState == BoardField.FieldType.Wall)
                             nextBit = "X";
                         else if (field.FieldState == BoardField.FieldType.Hole)
@@ -95,10 +98,13 @@ namespace MagnetGame
                                     nextBit = "<color=blue>" + nextBit + "</color>";
                             }
                         }
+                        trueX++;
 
                     }
                     visualization += nextBit;
                 }
+                if (y % 2 == 0)
+                    trueY++;
 
             }
 
