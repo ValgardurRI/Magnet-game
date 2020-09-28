@@ -1,5 +1,8 @@
+using System;
+
 namespace MagnetGame
 {
+    [Serializable]
     public struct BoardField
     {
         public enum FieldType
@@ -7,7 +10,9 @@ namespace MagnetGame
             Empty,
             Wall,
             Hole,
-            Magnet
+            Endpoint,
+            Magnet,
+            Player
 
         }
         public FieldType FieldState;

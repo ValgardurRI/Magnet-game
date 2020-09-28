@@ -2,6 +2,7 @@ using System;
 
 namespace MagnetGame
 {
+    [Serializable]
     public struct Position
     {
         public int x, y;

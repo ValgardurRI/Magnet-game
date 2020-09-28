@@ -25,6 +25,8 @@ namespace MagnetGame
         protected IEnumerable<MonoMagnet> magnets;
         protected MonoField[] fields;
         protected StateMachine stateMachine;
+
+        [SerializeField]
         protected Level level;
 
         void Start()
@@ -84,34 +86,33 @@ namespace MagnetGame
             public override void OnInspectorGUI()
             {
                 BaseBoard myBoard = (BaseBoard)target;
+                myBoard.level = (Level)EditorGUILayout.ObjectField("Level", myBoard.level, typeof(Level), true);
                 myBoard.editMode = EditorGUILayout.Toggle("Board edit mode", myBoard.editMode);
-                EditorGUILayout.ObjectField("Configuration", myBoard.configuration, typeof(BoardConfiguration), true);
                 EditorGUILayout.LabelField("Level string");
+                EditorGUI.BeginDisabledGroup(!myBoard.editMode);
+                myBoard.levelString = EditorGUILayout.TextArea(myBoard.levelString, GUILayout.MaxHeight(75));
+                EditorGUI.EndDisabledGroup();
                 if(myBoard.editMode)
                 {
-                    myBoard.levelString = EditorGUILayout.TextArea(myBoard.levelString, GUILayout.MaxHeight(75));
-                    if(GUILayout.Button("Set board"))
+                    if (GUILayout.Button("Set board"))
                     {
                         myBoard.SetLevel();
                     }
-                    
-                    EditorGUI.BeginDisabledGroup(true);
-                    EditorGUILayout.IntField("Columns", myBoard._columns);
-                    EditorGUILayout.IntField("Rows", myBoard._rows);
-                    EditorGUI.EndDisabledGroup();
                 }
                 else
                 {
-                    EditorGUI.BeginDisabledGroup(true);
-                    EditorGUILayout.TextArea(myBoard.levelString, GUILayout.MaxHeight(75));
-                    EditorGUI.EndDisabledGroup();
-                    if(GUILayout.Button("Copy level string to clipboard"))
+                    if (GUILayout.Button("Copy level string to clipboard"))
                     {
                         EditorGUIUtility.systemCopyBuffer = myBoard.levelString;
                     }
-                    myBoard._columns = EditorGUILayout.IntField("Columns", myBoard._columns);
-                    myBoard._rows = EditorGUILayout.IntField("Rows", myBoard._rows);
                 }
+
+                EditorGUI.BeginDisabledGroup(myBoard.editMode);
+                myBoard._columns = EditorGUILayout.IntField("Columns", myBoard._columns);
+                myBoard._rows = EditorGUILayout.IntField("Rows", myBoard._rows);
+                EditorGUI.EndDisabledGroup();
+
+                myBoard.configuration = (BoardConfiguration)EditorGUILayout.ObjectField("Configuration", myBoard.configuration, typeof(BoardConfiguration), true);
             }
         }
     }

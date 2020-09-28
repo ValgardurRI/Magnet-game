@@ -11,7 +11,6 @@ namespace MagnetGame
             return null;
         }
         public BoardField[] Fields;
-        public Player Player;
         public Level Level;
     }
 }

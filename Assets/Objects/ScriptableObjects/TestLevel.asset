@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e482de6ff18cc1340b4a03f9ea411721, type: 3}
+  m_Name: TestLevel
+  m_EditorClassIdentifier: 
+  LevelWidth: 4
+  LevelHeight: 4
+  Fields:
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 3
+    MagnetStrength: 4
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 5
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 4
+    MagnetStrength: 0
+    MagnetPolarity: 1
+  - FieldState: 1
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 3
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 1
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 2
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  VisualizationFont: {fileID: 12800000, guid: caa741df5da29f14d97a45cbec461b6b, type: 3}
