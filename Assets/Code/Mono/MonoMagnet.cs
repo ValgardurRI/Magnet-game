@@ -1,32 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 using static MagnetGame.Consts;
 
 namespace MagnetGame
 {
-    public class MonoMagnet : MonoBehaviour
+    public class MonoMagnet : Draggable
     {
         [SerializeField]
         protected MagnetColors colors;
-        public void Setup(Vector2 size, Vector2 position, int magnetStrength, bool polarity)
+        public void Setup(Vector2 size, Vector2 position, BaseBoard board, int magnetStrength, bool polarity)
         {
-            transform.position = position;
-            ((RectTransform)transform).sizeDelta = size;
+            Setup(size, position, board);
+
+            // set color of magnet color field
             GetComponent<Image>().color = polarity == POSITIVE ? colors.PositiveColor : colors.NegativeColor;
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
             
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
+            char sign = polarity == POSITIVE ? '+' : '-';
+            transform.GetComponentInChildren<TextMeshProUGUI>().text = sign + magnetStrength.ToString();
         }
     }
 }

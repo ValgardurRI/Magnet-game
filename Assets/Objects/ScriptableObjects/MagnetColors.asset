@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb83585a1e0275b4798758ceb163e9ec, type: 3}
   m_Name: MagnetColors
   m_EditorClassIdentifier: 
-  PositiveColor: {r: 0.8490566, g: 0.15619439, b: 0.15619439, a: 0}
-  NegativeColor: {r: 0.23148806, g: 0.5417757, b: 0.9622642, a: 0}
+  PositiveColor: {r: 0.8490566, g: 0.15619439, b: 0.15619439, a: 1}
+  NegativeColor: {r: 0.23148806, g: 0.5417757, b: 0.9622642, a: 1}

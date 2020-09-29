@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3791aafefde0c8c43acbd1ae8d77432e, type: 3}
   m_Name: BoardConfiguration
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 3188123120228873539, guid: 14c59f74b5eddd24fb5f10509b170405,
+    type: 3}
   magnetPrefab: {fileID: 6327565017016858146, guid: afc9af6fcf94db049b764f092ce3e08b,
     type: 3}
   fieldPrefab: {fileID: 9037621217789077436, guid: f3212dbb7805d054684482785916c64a,
     type: 3}
-  wallPrefab: {fileID: 0}
-  holePrefab: {fileID: 0}
+  wallPrefab: {fileID: 208234788531560113, guid: 046e6f7c5626a6a4ca05ceefcc4ad17b,
+    type: 3}
+  holePrefab: {fileID: 7168352097139834398, guid: 55640c272a01a8c4fb7377029b2df731,
+    type: 3}
+  endpointPrefab: {fileID: 7168352097139834398, guid: 0fd16a914284c4042ad405ac8c1b3dc7,
+    type: 3}

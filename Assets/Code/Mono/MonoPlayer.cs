@@ -6,27 +6,14 @@ using static MagnetGame.Consts;
 
 namespace MagnetGame
 {
-    public class MonoPlayer : MonoBehaviour
+    public class MonoPlayer : Draggable
     {
-        public static Color PositiveColor;
-        public static Color NegativeColor; 
-        public void Setup(Vector2 size, Vector2 position, int magnetStrength, bool polarity)
+        [SerializeField]
+        protected MagnetColors colors;
+        public void Setup(Vector2 size, Vector2 position, BaseBoard board, int magnetStrength, bool polarity)
         {
-            transform.position = position;
-            ((RectTransform)transform).sizeDelta = size;
-            GetComponent<Image>().color = polarity == POSITIVE ? PositiveColor : NegativeColor;
-        }
-        
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
+            Setup(size, position, board);
+            GetComponent<Image>().color = polarity == POSITIVE ? colors.PositiveColor : colors.NegativeColor;
         }
     }
 }

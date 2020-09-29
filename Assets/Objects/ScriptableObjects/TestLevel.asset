@@ -15,55 +15,37 @@ MonoBehaviour:
   LevelWidth: 9
   LevelHeight: 4
   Fields:
-  - FieldState: 0
+  - FieldState: 1
     MagnetStrength: 0
     MagnetPolarity: 0
   - FieldState: 3
     MagnetStrength: 4
     MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
-  - FieldState: 0
-    MagnetStrength: 0
-    MagnetPolarity: 0
   - FieldState: 2
     MagnetStrength: 0
     MagnetPolarity: 0
+  - FieldState: 4
+    MagnetStrength: 4
+    MagnetPolarity: 1
   - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 4
     MagnetStrength: 0
     MagnetPolarity: 0
   - FieldState: 0
@@ -85,6 +67,24 @@ MonoBehaviour:
     MagnetStrength: 0
     MagnetPolarity: 0
   - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - FieldState: 5
     MagnetStrength: 0
     MagnetPolarity: 0
   - FieldState: 0

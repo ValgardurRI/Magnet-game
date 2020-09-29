@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reflection.Emit;
 using UnityEditor;
 using UnityEngine;
@@ -13,7 +14,6 @@ namespace MagnetGame
     [CreateAssetMenu(fileName = "Level", menuName = "Level", order = 1)]
     public class Level : ScriptableObject
     {
-        // TODO: Add Json Serialization
         public int LevelWidth;
         public int LevelHeight;
         public BoardField[] Fields;
@@ -27,7 +27,7 @@ namespace MagnetGame
             {
                 throw new ArgumentException("Illegal x index " + x + ", value must be 0-" + (LevelWidth - 1) + ".");
             }
-            if (y >= LevelWidth || y < 0)
+            if (y >= LevelHeight || y < 0)
             {
                 throw new ArgumentException("Illegal y index " + y + ", value must be 0-" + (LevelHeight - 1) + ".");
             }
@@ -44,68 +44,53 @@ namespace MagnetGame
         public string Visualize(bool richText = false)
         {
             string visualization = "";
-            int trueY = 0;
-            for(int y = 0; y < LevelHeight + LevelWidth; y++)
+            for(int y = 0; y < LevelHeight; y++)
             {
-                if(y == LevelHeight + LevelWidth - 1)
+                for (int x = 0; x < LevelWidth; x++)
                 {
-                    break;
-                }
-                int trueX = 0;
-                for(int x = 0; x < LevelWidth + LevelHeight; x++)
-                {
-                    string nextBit = "!";
-                    if(x == LevelWidth + LevelHeight - 1)
+                    // Square value
+                    string nextBit = "?";
+                    var field = Fields[FieldIndex(x, y)];
+                    if (field.FieldState == BoardField.FieldType.Wall)
+                        nextBit = "X";
+                    else if (field.FieldState == BoardField.FieldType.Hole)
+                        nextBit = "O";
+                    else if (field.FieldState == BoardField.FieldType.Empty)
+                        nextBit = " ";
+                    else if (field.FieldState == BoardField.FieldType.Endpoint)
                     {
-                        nextBit = "\n";
-                    }
-                    else if (y % 2 == 1)
-                    {
-                        nextBit = "-";
-                    }
-                    else if (x % 2 == 1)
-                    {
-                        nextBit = "/";
+                        nextBit = "#";
+                        if (richText)
+                            nextBit = "<color=green>" + nextBit + "</color>";
                     }
                     else
                     {
-                        Debug.Log("X " + trueX + ", Y " + trueY);
-                        // TODO: This only works for even x and y. Fix this.
-                        var field = Fields[FieldIndex(trueX, trueY)];
-                        if (field.FieldState == BoardField.FieldType.Wall)
-                            nextBit = "X";
-                        else if (field.FieldState == BoardField.FieldType.Hole)
-                            nextBit = "O";
-                        else if (field.FieldState == BoardField.FieldType.Empty)
-                            nextBit = " ";
-                        else if (field.FieldState == BoardField.FieldType.Endpoint)
+                        if (field.FieldState == BoardField.FieldType.Magnet)
+                            nextBit = field.MagnetStrength.ToString();
+                        if (field.FieldState == BoardField.FieldType.Player)
+                            nextBit = "\u0394";
+                        if (richText)
                         {
-                            nextBit = "#";
-                            if (richText)
-                                nextBit = "<color=green>" + nextBit + "</color>";
+                            if (field.MagnetPolarity == POSITIVE)
+                                nextBit = "<color=red>" + nextBit + "</color>";
+                            else
+                                nextBit = "<color=blue>" + nextBit + "</color>";
                         }
-                        else
-                        {
-                            if (field.FieldState == BoardField.FieldType.Magnet)
-                                nextBit = field.MagnetStrength.ToString();
-                            if (field.FieldState == BoardField.FieldType.Player)
-                                nextBit = "\u0394";
-                            if (richText)
-                            {
-                                if (field.MagnetPolarity == POSITIVE)
-                                    nextBit = "<color=red>" + nextBit + "</color>";
-                                else
-                                    nextBit = "<color=blue>" + nextBit + "</color>";
-                            }
-                        }
-                        trueX++;
-
                     }
                     visualization += nextBit;
-                }
-                if (y % 2 == 0)
-                    trueY++;
 
+                    // Borders
+                    if (x == LevelWidth - 1)
+                    {
+                        visualization += "\n";
+                    }
+                    else
+                    {
+                        visualization += "/";
+                    }
+                }
+                if(y != LevelHeight - 1)
+                    visualization += String.Concat(Enumerable.Repeat("-", 2*LevelWidth - 1)) + "\n";
             }
 
             return visualization;
@@ -125,13 +110,17 @@ namespace MagnetGame
             {
                 Level myLevel = (Level)target;
                 EditorGUI.BeginChangeCheck();
-                myLevel.LevelWidth = EditorGUILayout.IntField("Level Width", myLevel.LevelWidth);
-                myLevel.LevelHeight = EditorGUILayout.IntField("Level Height", myLevel.LevelHeight);
+                int test1 = EditorGUILayout.IntField("Level Width", myLevel.LevelWidth);
+                int test2 = EditorGUILayout.IntField("Level Height", myLevel.LevelHeight);
                 if(EditorGUI.EndChangeCheck())
                 {
+                    Undo.RecordObject(target, "Level size changed");
+                    myLevel.LevelWidth = test1;
+                    myLevel.LevelHeight = test2;
                     myLevel.OnValidate();
-                    serializedObject.FindProperty("Fields").arraySize = myLevel.LevelWidth * myLevel.LevelHeight;
+                    serializedObject.Update();
                 }
+                
                 // Field related
                 myLevel.showFields = EditorGUILayout.Foldout(myLevel.showFields, "Fields");
                 if(myLevel.showFields)
