@@ -52,6 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f040aaf7cea16664cb51d5d15fcd4dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type:
+    FieldState: 4
+    MagnetStrength: 0
+    MagnetPolarity: 0
   colors: {fileID: 11400000, guid: d2db92a43aa296648bfc7779d1620557, type: 2}
 --- !u!222 &8328270504504475888
 CanvasRenderer:

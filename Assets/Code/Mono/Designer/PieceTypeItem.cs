@@ -5,7 +5,7 @@ namespace MagnetGame
 {
     public class PieceTypeItem : DesignerToolbarItem
     {
-        public BoardField pieceType;
+        public Piece pieceType;
 
         public override void DeselectEffect(DesignerBoard board){}
 

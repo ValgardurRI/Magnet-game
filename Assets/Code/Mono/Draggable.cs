@@ -8,8 +8,9 @@ namespace MagnetGame
     [RequireComponent(typeof(Image))]
     public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        // Configuration variables
-        bool draggable = true;
+        public bool CanDrag { get; private set; } = true;
+
+        public Piece basePiece;
 
         // Bookkeeping variables
         private Vector2 currentPos;
@@ -17,17 +18,18 @@ namespace MagnetGame
         private bool dragging;
         protected BaseBoard board;
 
-        public virtual void Setup(Vector2 size, Vector2 position, BaseBoard board)
+        public virtual void Setup(Vector2 size, Vector2 position, BaseBoard board, Piece pieceType)
         {
             transform.position = position;
             ((RectTransform)transform).sizeDelta = size;
             this.board = board;
-            SetDraggable(draggable);
+            SetDraggable(CanDrag);
+            basePiece = pieceType;
         }
 
         public void SetDraggable(bool value)
         {
-            draggable = value;
+            CanDrag = value;
             foreach(var image in transform.GetComponentsInChildren<Image>())
             {
                 image.raycastTarget = value;
@@ -45,7 +47,7 @@ namespace MagnetGame
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (draggable)
+            if (CanDrag)
             {
                 inputDelta = transform.position - Input.mousePosition;
                 currentPos = transform.position;
@@ -60,13 +62,13 @@ namespace MagnetGame
 
         public void OnDrag(PointerEventData eventData)
         {
-            if(draggable)
+            if(CanDrag)
                 transform.position = eventData.position + (Vector2)inputDelta;
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            if(draggable)
+            if(CanDrag)
             {
                 dragging = false;
                 MonoField cell = Utils.GetComponentFromRaycast<MonoField>(Input.mousePosition);

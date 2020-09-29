@@ -26,7 +26,7 @@ namespace MagnetGame
 
         public override void FieldClickEffect(MonoField field, DesignerBoard board)
         {
-            var piece = board.AddPiece(new BoardField { FieldState = BoardField.FieldType.Player, MagnetPolarity = polarity }, field);
+            var piece = board.AddPiece(new Piece { Type = Piece.PieceType.Player, MagnetPolarity = polarity }, field);
             piece.SetDraggable(false);
         }
 

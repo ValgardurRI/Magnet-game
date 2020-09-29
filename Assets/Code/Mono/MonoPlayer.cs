@@ -10,9 +10,9 @@ namespace MagnetGame
     {
         [SerializeField]
         protected MagnetColors colors;
-        public void Setup(Vector2 size, Vector2 position, BaseBoard board, int magnetStrength, bool polarity)
+        public void Setup(Vector2 size, Vector2 position, BaseBoard board, Piece pieceType, int magnetStrength, bool polarity)
         {
-            Setup(size, position, board);
+            Setup(size, position, board, pieceType);
             GetComponent<Image>().color = polarity == POSITIVE ? colors.PositiveColor : colors.NegativeColor;
         }
     }

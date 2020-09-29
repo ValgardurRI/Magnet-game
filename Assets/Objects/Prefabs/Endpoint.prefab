@@ -87,3 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00513275a7c9bc74ba33eb366ea609df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type:
+    FieldState: 3
+    MagnetStrength: 0
+    MagnetPolarity: 0

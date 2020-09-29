@@ -16,7 +16,7 @@ namespace MagnetGame
     {
         public int LevelWidth;
         public int LevelHeight;
-        public BoardField[] Fields;
+        public Piece[] Fields;
 
         [SerializeField]
         protected Font VisualizationFont;
@@ -36,7 +36,7 @@ namespace MagnetGame
 
         public GameState ToState()
         {
-            var stateFields = new BoardField[Fields.Length];
+            var stateFields = new Piece[Fields.Length];
             Fields.CopyTo(stateFields, 0);
             return new GameState{Fields = stateFields, Level = this};
         }
@@ -51,13 +51,13 @@ namespace MagnetGame
                     // Square value
                     string nextBit = "?";
                     var field = Fields[FieldIndex(x, y)];
-                    if (field.FieldState == BoardField.FieldType.Wall)
+                    if (field.Type == Piece.PieceType.Wall)
                         nextBit = "X";
-                    else if (field.FieldState == BoardField.FieldType.Hole)
+                    else if (field.Type == Piece.PieceType.Hole)
                         nextBit = "O";
-                    else if (field.FieldState == BoardField.FieldType.Empty)
+                    else if (field.Type == Piece.PieceType.Empty)
                         nextBit = " ";
-                    else if (field.FieldState == BoardField.FieldType.Endpoint)
+                    else if (field.Type == Piece.PieceType.Endpoint)
                     {
                         nextBit = "#";
                         if (richText)
@@ -65,9 +65,9 @@ namespace MagnetGame
                     }
                     else
                     {
-                        if (field.FieldState == BoardField.FieldType.Magnet)
+                        if (field.Type == Piece.PieceType.Magnet)
                             nextBit = field.MagnetStrength.ToString();
-                        if (field.FieldState == BoardField.FieldType.Player)
+                        if (field.Type == Piece.PieceType.Player)
                             nextBit = "\u0394";
                         if (richText)
                         {

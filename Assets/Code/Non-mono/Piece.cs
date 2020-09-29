@@ -3,9 +3,9 @@ using System;
 namespace MagnetGame
 {
     [Serializable]
-    public struct BoardField
+    public struct Piece
     {
-        public enum FieldType
+        public enum PieceType
         {
             Empty,
             Wall,
@@ -13,9 +13,8 @@ namespace MagnetGame
             Endpoint,
             Magnet,
             Player
-
         }
-        public FieldType FieldState;
+        public PieceType Type;
         public int MagnetStrength;
         public bool MagnetPolarity;
     }

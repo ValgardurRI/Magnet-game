@@ -59,37 +59,37 @@ namespace MagnetGame
 
         }
 
-        public Draggable AddPiece(BoardField piece, MonoField field)
+        public Draggable AddPiece(Piece piece, MonoField field)
         {
             Draggable draggablePiece = null;
-            if (piece.FieldState == BoardField.FieldType.Wall)
+            if (piece.Type == Piece.PieceType.Wall)
             {
                 var wall = Instantiate(configuration.wallPrefab, pieceTransform);
-                wall.Setup(fieldSize, field.transform.position, this);
+                wall.Setup(fieldSize, field.transform.position, this, piece);
                 draggablePiece = wall;
             }
-            else if (piece.FieldState == BoardField.FieldType.Hole)
+            else if (piece.Type == Piece.PieceType.Hole)
             {
                 var hole = Instantiate(configuration.holePrefab, pieceTransform);
-                hole.Setup(fieldSize, field.transform.position, this);
+                hole.Setup(fieldSize, field.transform.position, this, piece);
                 draggablePiece = hole;
             }
-            else if (piece.FieldState == BoardField.FieldType.Endpoint)
+            else if (piece.Type == Piece.PieceType.Endpoint)
             {
                 var endpoint = Instantiate(configuration.endpointPrefab, pieceTransform);
-                endpoint.Setup(fieldSize, field.transform.position, this);
+                endpoint.Setup(fieldSize, field.transform.position, this, piece);
                 draggablePiece = endpoint;
             }
-            else if (piece.FieldState == BoardField.FieldType.Magnet)
+            else if (piece.Type == Piece.PieceType.Magnet)
             {
                 var magnet = Instantiate(configuration.magnetPrefab, pieceTransform);
-                magnet.Setup(fieldSize, field.transform.position, this, piece.MagnetStrength, piece.MagnetPolarity);
+                magnet.Setup(fieldSize, field.transform.position, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
                 draggablePiece = magnet;
             }
-            else if (piece.FieldState == BoardField.FieldType.Player)
+            else if (piece.Type == Piece.PieceType.Player)
             {
                 var player = Instantiate(configuration.playerPrefab, pieceTransform);
-                player.Setup(fieldSize, field.transform.position, this, piece.MagnetStrength, piece.MagnetPolarity);
+                player.Setup(fieldSize, field.transform.position, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
                 draggablePiece = player;
             }
             Place(draggablePiece, field);
@@ -123,43 +123,5 @@ namespace MagnetGame
                 }
             }
         }
-
-        /*
-        [CustomEditor(typeof(BaseBoard))]
-        public class BoardEditor : Editor 
-        {
-            public override void OnInspectorGUI()
-            {
-                BaseBoard myBoard = (BaseBoard)target;
-                myBoard.level = (Level)EditorGUILayout.ObjectField("Level", myBoard.level, typeof(Level), true);
-                myBoard.editMode = EditorGUILayout.Toggle("Board edit mode", myBoard.editMode);
-                EditorGUILayout.LabelField("Level string");
-                EditorGUI.BeginDisabledGroup(!myBoard.editMode);
-                myBoard.levelString = EditorGUILayout.TextArea(myBoard.levelString, GUILayout.MaxHeight(75));
-                EditorGUI.EndDisabledGroup();
-                if(myBoard.editMode)
-                {
-                    if (GUILayout.Button("Set board"))
-                    {
-                        myBoard.SetLevel();
-                    }
-                }
-                else
-                {
-                    if (GUILayout.Button("Copy level string to clipboard"))
-                    {
-                        EditorGUIUtility.systemCopyBuffer = myBoard.levelString;
-                    }
-                }
-
-                EditorGUI.BeginDisabledGroup(true);
-                EditorGUILayout.IntField("Columns", myBoard.Columns);
-                EditorGUILayout.IntField("Rows", myBoard.Rows);
-                EditorGUI.EndDisabledGroup();
-
-                myBoard.configuration = (BoardConfiguration)EditorGUILayout.ObjectField("Configuration", myBoard.configuration, typeof(BoardConfiguration), true);
-            }
-        }
-        */
     }
 }

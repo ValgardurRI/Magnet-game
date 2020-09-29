@@ -10,7 +10,7 @@ namespace MagnetGame
             // TODO: Implement function
             return null;
         }
-        public BoardField[] Fields;
+        public Piece[] Fields;
         public Level Level;
     }
 }

@@ -15,112 +15,112 @@ MonoBehaviour:
   LevelWidth: 6
   LevelHeight: 6
   Fields:
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 4
     MagnetPolarity: 0
-  - FieldState: 5
+  - Type: 5
     MagnetStrength: 0
     MagnetPolarity: 1
-  - FieldState: 5
+  - Type: 5
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 2
+  - Type: 2
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 4
+  - Type: 4
     MagnetStrength: 1
     MagnetPolarity: 0
-  - FieldState: 2
+  - Type: 2
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 2
+  - Type: 2
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 2
+  - Type: 2
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 2
+  - Type: 2
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 4
-    MagnetStrength: 1
-    MagnetPolarity: 1
-  - FieldState: 4
+  - Type: 4
     MagnetStrength: 1
     MagnetPolarity: 1
-  - FieldState: 1
+  - Type: 4
+    MagnetStrength: 1
+    MagnetPolarity: 1
+  - Type: 1
     MagnetStrength: 0
     MagnetPolarity: 0
-  - FieldState: 3
+  - Type: 3
     MagnetStrength: 0
     MagnetPolarity: 0
   VisualizationFont: {fileID: 12800000, guid: caa741df5da29f14d97a45cbec461b6b, type: 3}
