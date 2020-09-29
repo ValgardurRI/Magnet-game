@@ -111,7 +111,7 @@ namespace MagnetGame
                     newfield.name = "Field(" + x + ", " + y + ")"; 
                     
                     //positioning
-                    Vector2 fieldPosition = new Vector2(x*fieldWidth, y*fieldHeight) + fieldOriginPoint;
+                    Vector2 fieldPosition = new Vector2(x*fieldWidth, (Rows-y-1)*fieldHeight) + fieldOriginPoint;
 
                     //Setup
                     fields[level.FieldIndex(x,y)] = newfield;

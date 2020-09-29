@@ -370,7 +370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1485154394557547443}
   - component: {fileID: 1485154394557547445}
-  - component: {fileID: 1485154394557547442}
+  - component: {fileID: 1967145297788230088}
   m_Layer: 5
   m_Name: Stairs
   m_TagString: Untagged
@@ -407,7 +407,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485154394557547440}
   m_CullTransparentMesh: 0
---- !u!114 &1485154394557547442
+--- !u!114 &1967145297788230088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -416,10 +416,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1485154394557547440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e20b1ced8eec0f74c853d661c2ce36d0, type: 3}
+  m_Script: {fileID: 11500000, guid: ad52fe1e47a5f1548936f9c7d2f80b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 0}
+  pieceType:
+    FieldState: 3
+    MagnetStrength: 0
+    MagnetPolarity: 0
 --- !u!1 &1485154394603023335
 GameObject:
   m_ObjectHideFlags: 0
