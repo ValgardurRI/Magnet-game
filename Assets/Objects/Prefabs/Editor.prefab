@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 0}
   pieceType:
-    FieldState: 1
+    Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
 --- !u!222 &1485154394459351433
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 0}
   pieceType:
-    FieldState: 3
+    Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
 --- !u!1 &1485154394603023335
@@ -489,9 +489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16d9ccad0495ab488d8c05db2b27a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelString: 
   configuration: {fileID: 11400000, guid: d06f492b061235a46be35f08a7ebd20b, type: 2}
-  level: {fileID: 11400000, guid: 86868c1f94e641b49b2c176db339c035, type: 2}
+  level: {fileID: 0}
   toolbar: {fileID: 1485154395048456198}
 --- !u!1 &1485154394615874378
 GameObject:
@@ -1336,7 +1335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 0}
   pieceType:
-    FieldState: 2
+    Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
 --- !u!222 &1485154395566886855

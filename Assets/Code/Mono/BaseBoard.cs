@@ -6,13 +6,11 @@ using UnityEngine.UI;
 namespace MagnetGame
 {
     [RequireComponent(typeof(AspectRatioFitter))]
+    [System.Serializable]
     public abstract class BaseBoard: MonoBehaviour
     {
         public int Rows => level != null ? level.LevelHeight : 0;
         public int Columns => level != null ? level.LevelWidth : 0;
-
-        [SerializeField]
-        protected string levelString;
 
         [SerializeField]
         protected BoardConfiguration configuration;
@@ -34,29 +32,12 @@ namespace MagnetGame
 
         public virtual void Setup()
         {
+            fieldTransform = transform.Find("fields");
+            pieceTransform = transform.Find("fieldPieces");
             if(level != null)
             {
-                fields = new MonoField[Rows*Columns];
-                GetComponent<AspectRatioFitter>().aspectRatio = Columns / (float)Rows;
-                fieldTransform = transform.Find("fields");
-                pieceTransform = transform.Find("fieldPieces");
-
-                Rect boardRect = ((RectTransform)transform).rect;
-                float fieldWidth = boardRect.width / Columns;
-                float fieldHeight = boardRect.height / Rows;
-                fieldSize = new Vector2(fieldWidth, fieldHeight);
                 InstantiateBoard();
             }
-        }
-
-        public void SetLevel()
-        {
-            SetLevel(levelString);
-        }
-
-        public void SetLevel(string levelString)
-        {
-
         }
 
         public Draggable AddPiece(Piece piece, MonoField field)
@@ -92,15 +73,35 @@ namespace MagnetGame
                 player.Setup(fieldSize, field.transform.position, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
                 draggablePiece = player;
             }
+            else
+            {
+                return null;
+            }
             Place(draggablePiece, field);
             return draggablePiece;
+        }
+        
+        protected void ClearBoard()
+        {
+            foreach(Transform child in fieldTransform)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach(Transform child in pieceTransform)
+            {
+                Destroy(child.gameObject);
+            }
         }
 
         protected virtual void InstantiateBoard() 
         {
+            fields = new MonoField[Rows*Columns];
+            GetComponent<AspectRatioFitter>().aspectRatio = Columns / (float)Rows;
+
             Rect boardRect = ((RectTransform)transform).rect;
-            float fieldWidth = boardRect.width/Columns;
-            float fieldHeight = boardRect.height/Rows;
+            float fieldWidth = boardRect.width / Columns;
+            float fieldHeight = boardRect.height / Rows;
+            fieldSize = new Vector2(fieldWidth, fieldHeight);
             Vector2 fieldOriginPoint = (Vector2)transform.position - new Vector2(boardRect.width, boardRect.height)/2 + fieldSize/2;
             for (int y = 0; y < Rows; y++)
             {
@@ -115,7 +116,7 @@ namespace MagnetGame
 
                     //Setup
                     fields[level.FieldIndex(x,y)] = newfield;
-                    fields[level.FieldIndex(x,y)].Setup(fieldSize, fieldPosition);
+                    fields[level.FieldIndex(x,y)].Setup(fieldSize, fieldPosition, level.FieldIndex(x,y));
 
                     // Instantiate board pieces
                     var piece = level.Fields[level.FieldIndex(x, y)];

@@ -35,7 +35,7 @@ MonoBehaviour:
     MagnetPolarity: 0
   - Type: 0
     MagnetStrength: 0
-    MagnetPolarity: 0
+    MagnetPolarity: 1
   - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
@@ -46,10 +46,10 @@ MonoBehaviour:
     MagnetStrength: 0
     MagnetPolarity: 0
   - Type: 0
-    MagnetStrength: 0
+    MagnetStrength: 1
     MagnetPolarity: 0
   - Type: 0
-    MagnetStrength: 0
+    MagnetStrength: 1
     MagnetPolarity: 0
   - Type: 0
     MagnetStrength: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   - Type: 4
     MagnetStrength: 1
     MagnetPolarity: 1
-  - Type: 1
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
   - Type: 3

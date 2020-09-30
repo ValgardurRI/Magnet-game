@@ -6,6 +6,7 @@ using UnityEngine.Timeline;
 
 namespace MagnetGame
 {
+    [System.Serializable]
     public class DesignerBoard : BaseBoard, IPointerClickHandler
     {
         public DesignerToolbar toolbar;
@@ -13,6 +14,7 @@ namespace MagnetGame
         public override void Setup()
         {
             base.Setup();
+
             SetAllPiecesDraggable(false);
         }
 
@@ -31,6 +33,7 @@ namespace MagnetGame
             {
                 Destroy(field.piece.gameObject);
                 field.piece = null;
+                level.Fields[field.FieldId].Type = Piece.PieceType.Empty;
             }
         }
 
@@ -54,6 +57,7 @@ namespace MagnetGame
                     if (field != null && field.piece == piece)
                     {
                         field.piece = null;
+                        level.Fields[field.FieldId].Type = Piece.PieceType.Empty;
                     }
                 }
             }
@@ -63,9 +67,10 @@ namespace MagnetGame
                 RemoveFromOldField();
                 // set piece on new field
                 square.piece = piece;
-
+                level.Fields[square.FieldId] = piece.basePiece;
                 return square.transform.position;
             }
+            // Magnet stacking case
             else if(square.piece != piece)
             {
                 // Both pieces must be magnets
@@ -93,38 +98,51 @@ namespace MagnetGame
             return null;
         }
 
+        public void SaveLevel()
+        {
+            string path = "Assets/Objects/ScriptableObjects/Levels/";
+            ScriptableObject temp = Instantiate(level);
+            AssetDatabase.CreateAsset(temp, path + level.name + ".asset");
+            Debug.Log("Level " + level.name + " saved to folder " + path);
+        }
+
         [CustomEditor(typeof(DesignerBoard))]
         public class DesignerEditor : Editor
         {
             public override void OnInspectorGUI()
             {
                 DesignerBoard myBoard = (DesignerBoard)target;
-                myBoard.level = (Level)EditorGUILayout.ObjectField("Level", myBoard.level, typeof(Level), true);
-                EditorGUILayout.LabelField("Level string");
-                myBoard.levelString = EditorGUILayout.TextArea(myBoard.levelString, GUILayout.MaxHeight(75));
-                /*
-                if (myBoard.editMode)
+                myBoard.level = EditorGUILayout.ObjectField("Level", myBoard.level, typeof(Level), true) as Level;
+                if(myBoard.level == null)
                 {
-                    if (GUILayout.Button("Set board"))
-                    {
-                        myBoard.SetLevel();
-                    }
+                    Undo.RecordObject(target, "Some Random text");
+                    myBoard.level = ScriptableObject.CreateInstance<Level>();
+                    myBoard.level.UpdateArraySize();
                 }
                 else
                 {
-                    if (GUILayout.Button("Copy level string to clipboard"))
+                    myBoard.level.name = EditorGUILayout.TextField("Level name", myBoard.level.name);
+                    EditorGUI.BeginChangeCheck();
+                    myBoard.level.LevelWidth = EditorGUILayout.IntField("Columns", myBoard.level.LevelWidth);
+                    myBoard.level.LevelHeight = EditorGUILayout.IntField("Rows", myBoard.level.LevelHeight);
+                    if(EditorGUI.EndChangeCheck())
                     {
-                        EditorGUIUtility.systemCopyBuffer = myBoard.levelString;
+                        myBoard.level.UpdateArraySize();
+                        if(EditorApplication.isPlaying)
+                        {
+                            myBoard.ClearBoard();
+                            myBoard.InstantiateBoard();
+                        }
+                    }
+                    if (GUILayout.Button("Save level"))
+                    {
+                        myBoard.SaveLevel();
                     }
                 }
-                */
-
-                EditorGUI.BeginDisabledGroup(true);
-                EditorGUILayout.IntField("Columns", myBoard.Columns);
-                EditorGUILayout.IntField("Rows", myBoard.Rows);
-                EditorGUI.EndDisabledGroup();
 
                 myBoard.configuration = (BoardConfiguration)EditorGUILayout.ObjectField("Configuration", myBoard.configuration, typeof(BoardConfiguration), true);
+                if(GUI.changed)
+                    EditorUtility.SetDirty(target);
             }
         }
     }

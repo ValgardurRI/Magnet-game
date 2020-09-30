@@ -10,7 +10,7 @@ using static MagnetGame.Consts;
 
 namespace MagnetGame
 {
-    [Serializable]
+    [System.Serializable]
     [CreateAssetMenu(fileName = "Level", menuName = "Level", order = 1)]
     public class Level : ScriptableObject
     {
@@ -96,11 +96,16 @@ namespace MagnetGame
             return visualization;
         }
 
-        private void OnValidate()
+        public void UpdateArraySize()
         {
             LevelWidth = Mathf.Clamp(LevelWidth, 1, 20);
             LevelHeight = Mathf.Clamp(LevelHeight, 1, 20);
             Array.Resize(ref Fields, LevelWidth * LevelHeight);
+        }
+
+        private void OnValidate()
+        {
+            UpdateArraySize();
         }
 
         [CustomEditor(typeof(Level))]
