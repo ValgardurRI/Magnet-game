@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine.Timeline;
 
 namespace MagnetGame
@@ -100,12 +102,17 @@ namespace MagnetGame
 
         public void SaveLevel()
         {
+            #if UNITY_EDITOR
             string path = "Assets/Objects/ScriptableObjects/Levels/";
             ScriptableObject temp = Instantiate(level);
             AssetDatabase.CreateAsset(temp, path + level.name + ".asset");
             Debug.Log("Level " + level.name + " saved to folder " + path);
+            #else
+            Debug.LogError("Saving levels is not supported in built project");
+            #endif
         }
 
+        #if UNITY_EDITOR
         [CustomEditor(typeof(DesignerBoard))]
         public class DesignerEditor : Editor
         {
@@ -145,5 +152,6 @@ namespace MagnetGame
                     EditorUtility.SetDirty(target);
             }
         }
+        #endif
     }
 }

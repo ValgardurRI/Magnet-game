@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection.Emit;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UIElements;
 using static MagnetGame.Consts;
@@ -108,6 +110,7 @@ namespace MagnetGame
             UpdateArraySize();
         }
 
+        #if UNITY_EDITOR
         [CustomEditor(typeof(Level))]
         public class LevelEditor : Editor
         {
@@ -158,5 +161,6 @@ namespace MagnetGame
                 serializedObject.ApplyModifiedProperties();
             }
         }
+        #endif
     }
 }

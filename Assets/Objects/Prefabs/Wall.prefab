@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7261107169402537572}
   - component: {fileID: 8383947121957886260}
   - component: {fileID: 208234788531560113}
+  - component: {fileID: 871517503993756183}
   m_Layer: 5
   m_Name: Wall
   m_TagString: Untagged
@@ -87,7 +88,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00513275a7c9bc74ba33eb366ea609df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type:
-    FieldState: 1
+  basePiece:
+    Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
+--- !u!114 &871517503993756183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169438434955639672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
