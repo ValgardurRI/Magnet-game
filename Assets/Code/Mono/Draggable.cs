@@ -18,10 +18,11 @@ namespace MagnetGame
         private bool dragging;
         protected BaseBoard board;
 
-        public virtual void Setup(Vector2 size, Vector2 position, BaseBoard board, Piece pieceType)
+        public virtual void Setup(Vector2 anchorMin, Vector2 anchorMax, BaseBoard board, Piece pieceType)
         {
-            transform.position = position;
-            ((RectTransform)transform).sizeDelta = size;
+            var rectTransform = ((RectTransform)transform);
+            rectTransform.anchorMin = anchorMin;
+            rectTransform.anchorMax = anchorMax;
             this.board = board;
             SetDraggable(CanDrag);
             basePiece = pieceType;

@@ -19,7 +19,7 @@ namespace MagnetGame
         protected StateMachine stateMachine;
         protected Transform fieldTransform;
         protected Transform pieceTransform;
-        protected Vector2 fieldSize;
+        //protected Vector2 fieldSize;
 
         [SerializeField]
         protected Level level;
@@ -42,35 +42,38 @@ namespace MagnetGame
 
         public Draggable AddPiece(Piece piece, MonoField field)
         {
+            var fieldAnchorMin = ((RectTransform)field.transform).anchorMin;
+            var fieldAnchorMax = ((RectTransform)field.transform).anchorMax;
+            var fieldSize = new Vector2(1,1);
             Draggable draggablePiece = null;
             if (piece.Type == Piece.PieceType.Wall)
             {
                 var wall = Instantiate(configuration.wallPrefab, pieceTransform);
-                wall.Setup(fieldSize, field.transform.position, this, piece);
+                wall.Setup(fieldAnchorMin, fieldAnchorMax, this, piece);
                 draggablePiece = wall;
             }
             else if (piece.Type == Piece.PieceType.Hole)
             {
                 var hole = Instantiate(configuration.holePrefab, pieceTransform);
-                hole.Setup(fieldSize, field.transform.position, this, piece);
+                hole.Setup(fieldAnchorMin, fieldAnchorMax, this, piece);
                 draggablePiece = hole;
             }
             else if (piece.Type == Piece.PieceType.Endpoint)
             {
                 var endpoint = Instantiate(configuration.endpointPrefab, pieceTransform);
-                endpoint.Setup(fieldSize, field.transform.position, this, piece);
+                endpoint.Setup(fieldAnchorMin, fieldAnchorMax, this, piece);
                 draggablePiece = endpoint;
             }
             else if (piece.Type == Piece.PieceType.Magnet)
             {
                 var magnet = Instantiate(configuration.magnetPrefab, pieceTransform);
-                magnet.Setup(fieldSize, field.transform.position, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
+                magnet.Setup(fieldAnchorMin, fieldAnchorMax, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
                 draggablePiece = magnet;
             }
             else if (piece.Type == Piece.PieceType.Player)
             {
                 var player = Instantiate(configuration.playerPrefab, pieceTransform);
-                player.Setup(fieldSize, field.transform.position, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
+                player.Setup(fieldAnchorMin, fieldAnchorMax, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
                 draggablePiece = player;
             }
             else
@@ -98,29 +101,32 @@ namespace MagnetGame
             fields = new MonoField[Rows*Columns];
             GetComponent<AspectRatioFitter>().aspectRatio = Columns / (float)Rows;
 
-            Rect boardRect = ((RectTransform)transform).rect;
-            float fieldWidth = boardRect.width / Columns;
-            float fieldHeight = boardRect.height / Rows;
-            fieldSize = new Vector2(fieldWidth, fieldHeight);
-            Vector2 fieldOriginPoint = (Vector2)transform.position - new Vector2(boardRect.width, boardRect.height)/2 + fieldSize/2;
+            Vector2 boardSize = new Vector2(((RectTransform)transform).rect.width * transform.lossyScale.x, ((RectTransform)transform).rect.height * transform.lossyScale.y);
             for (int y = 0; y < Rows; y++)
             {
                 for(int x = 0; x < Columns; x++)
                 {
-                    //create the field and give it a descriptive name.
-                    MonoField newfield = MonoField.Instantiate(configuration.fieldPrefab, fieldTransform);
-                    newfield.name = "Field(" + x + ", " + y + ")"; 
+                    // Create the field and give it a descriptive name.
+                    MonoField newField = MonoField.Instantiate(configuration.fieldPrefab, fieldTransform);
+                    newField.name = "Field(" + x + ", " + y + ")"; 
                     
-                    //positioning
-                    Vector2 fieldPosition = new Vector2(x*fieldWidth, (Rows-y-1)*fieldHeight) + fieldOriginPoint;
+                    // Positioning
+                    //Vector2 fieldPosition = new Vector2(x*fieldWidth, (Rows-y-1)*fieldHeight) + fieldOriginPoint;
 
-                    //Setup
-                    fields[level.FieldIndex(x,y)] = newfield;
-                    fields[level.FieldIndex(x,y)].Setup(fieldSize, fieldPosition, level.FieldIndex(x,y));
+                    // Anchoring
+                    Vector2 minAnchor = new Vector2(x/(float)Columns, y/(float)Rows);
+                    Vector2 maxAnchor = new Vector2((x + 1)/(float)Columns, (y + 1)/(float)Rows);
+                    var newFieldTransform = (RectTransform)newField.transform;
+                    newFieldTransform.anchorMin = minAnchor;
+                    newFieldTransform.anchorMax = maxAnchor;
+
+                    // Setup
+                    fields[level.FieldIndex(x,y)] = newField;
+                    fields[level.FieldIndex(x,y)].Setup(level.FieldIndex(x,y));
 
                     // Instantiate board pieces
                     var piece = level.Fields[level.FieldIndex(x, y)];
-                    AddPiece(piece, fields[level.FieldIndex(x, y)]);
+                    var monoPiece = AddPiece(piece, fields[level.FieldIndex(x, y)]);
                 }
             }
         }
