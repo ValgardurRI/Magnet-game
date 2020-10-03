@@ -29,7 +29,7 @@ namespace MagnetGame
             }
         }
 
-        public void RemoveFromField(MonoField field)
+        public void DeletePiece(MonoField field)
         {
             if(field.piece != null)
             {
@@ -72,30 +72,36 @@ namespace MagnetGame
                 level.Fields[square.FieldId] = piece.basePiece;
                 return square.transform.position;
             }
-            // Magnet stacking case
-            else if(square.piece != piece)
+            else if(!square.piece.CanDrag)
             {
-                // Both pieces must be magnets
-                bool stackMagnetCondition = piece.basePiece.Type == Piece.PieceType.Magnet;
-                stackMagnetCondition &= square.piece.basePiece.Type == piece.basePiece.Type;
+                // For replacing pieces when placed
+                RemoveFromOldField();
+                DeletePiece(square);
+                square.piece = piece;
+                level.Fields[square.FieldId] = piece.basePiece;
+                return square.transform.position;
+            }
+            // Both pieces must be magnets
+            bool stackMagnetCondition = piece.basePiece.Type == Piece.PieceType.Magnet;
+            stackMagnetCondition &= square.piece != piece;
+            stackMagnetCondition &= square.piece.basePiece.Type == piece.basePiece.Type;
 
-                // Neither magnet can be 0
-                stackMagnetCondition &= piece.basePiece.MagnetStrength != 0;
-                stackMagnetCondition &= square.piece.basePiece.MagnetStrength != 0;
+            // Neither magnet can be 0
+            stackMagnetCondition &= piece.basePiece.MagnetStrength != 0;
+            stackMagnetCondition &= square.piece.basePiece.MagnetStrength != 0;
 
-                // Magnet polarities must be equal
-                stackMagnetCondition &= piece.basePiece.MagnetPolarity == square.piece.basePiece.MagnetPolarity;
+            // Magnet polarities must be equal
+            stackMagnetCondition &= piece.basePiece.MagnetPolarity == square.piece.basePiece.MagnetPolarity;
 
-                if (stackMagnetCondition)
-                {
-                    var newMagnet = new Piece { MagnetStrength = (square.piece.basePiece.MagnetStrength + piece.basePiece.MagnetStrength), MagnetPolarity = piece.basePiece.MagnetPolarity, Type = piece.basePiece.Type };
-                    bool oldDragability = square.piece.CanDrag; 
-                    RemoveFromField(square);
-                    RemoveFromOldField();
-                    Destroy(piece.gameObject);
-                    var newPiece = AddPiece(newMagnet, square);
-                    newPiece.SetDraggable(oldDragability);
-                }
+            if (stackMagnetCondition)
+            {
+                var newMagnet = new Piece { MagnetStrength = (square.piece.basePiece.MagnetStrength + piece.basePiece.MagnetStrength), MagnetPolarity = piece.basePiece.MagnetPolarity, Type = piece.basePiece.Type };
+                bool oldDragability = square.piece.CanDrag; 
+                DeletePiece(square);
+                RemoveFromOldField();
+                Destroy(piece.gameObject);
+                var newPiece = AddPiece(newMagnet, square);
+                newPiece.SetDraggable(oldDragability);
             }
             return null;
         }
@@ -106,6 +112,7 @@ namespace MagnetGame
             string path = "Assets/Objects/ScriptableObjects/Levels/";
             ScriptableObject temp = Instantiate(level);
             AssetDatabase.CreateAsset(temp, path + level.name + ".asset");
+            level = (Level)temp;
             Debug.Log("Level " + level.name + " saved to folder " + path);
             #else
             Debug.LogError("Saving levels is not supported in built project");

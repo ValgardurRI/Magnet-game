@@ -8,6 +8,8 @@ namespace MagnetGame
         public MonoPlayer playerPrefab;
         public MonoMagnet magnetPrefab;
         public MonoField fieldPrefab;
+        public MonoDoor doorPrefab; 
+        public MonoLock lockPrefab;
         public Draggable wallPrefab;
         public Draggable holePrefab;
         public Draggable endpointPrefab;

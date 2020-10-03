@@ -11,7 +11,7 @@ namespace MagnetGame
 
         public override void FieldClickEffect(MonoField field, DesignerBoard board)
         {
-            board.RemoveFromField(field);
+            board.DeletePiece(field);
         }
 
         public override void SelectEffect(DesignerBoard board){}

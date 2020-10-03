@@ -71,6 +71,10 @@ namespace MagnetGame
                             nextBit = field.MagnetStrength.ToString();
                         if (field.Type == Piece.PieceType.Player)
                             nextBit = "\u0394";
+                        if (field.Type == Piece.PieceType.Lock)
+                            nextBit = "A" + field.MagnetStrength;
+                        if (field.Type == Piece.PieceType.Door)
+                            nextBit = "A" + field.MagnetStrength; 
                         if (richText)
                         {
                             if (field.MagnetPolarity == POSITIVE)

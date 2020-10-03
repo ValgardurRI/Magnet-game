@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace MagnetGame
 {
+    using pType = Piece.PieceType;
     [RequireComponent(typeof(AspectRatioFitter))]
     [System.Serializable]
     public abstract class BaseBoard: MonoBehaviour
@@ -46,41 +47,52 @@ namespace MagnetGame
             var fieldAnchorMax = ((RectTransform)field.transform).anchorMax;
             var fieldSize = new Vector2(1,1);
             Draggable draggablePiece = null;
-            if (piece.Type == Piece.PieceType.Wall)
+            if (piece.Type == pType.Wall || piece.Type == pType.Hole || piece.Type == pType.Endpoint)
             {
-                var wall = Instantiate(configuration.wallPrefab, pieceTransform);
-                wall.Setup(fieldAnchorMin, fieldAnchorMax, this, piece);
-                draggablePiece = wall;
+                Draggable staticPiece = null;
+                if (piece.Type == pType.Wall)
+                    staticPiece = Instantiate(configuration.wallPrefab, pieceTransform);
+                if (piece.Type == pType.Hole)
+                    staticPiece = Instantiate(configuration.holePrefab, pieceTransform);
+                if (piece.Type == pType.Endpoint)
+                    staticPiece = Instantiate(configuration.endpointPrefab, pieceTransform);
+                staticPiece.Setup(fieldAnchorMin, fieldAnchorMax, this, piece);
+                draggablePiece = staticPiece;
             }
-            else if (piece.Type == Piece.PieceType.Hole)
-            {
-                var hole = Instantiate(configuration.holePrefab, pieceTransform);
-                hole.Setup(fieldAnchorMin, fieldAnchorMax, this, piece);
-                draggablePiece = hole;
-            }
-            else if (piece.Type == Piece.PieceType.Endpoint)
-            {
-                var endpoint = Instantiate(configuration.endpointPrefab, pieceTransform);
-                endpoint.Setup(fieldAnchorMin, fieldAnchorMax, this, piece);
-                draggablePiece = endpoint;
-            }
-            else if (piece.Type == Piece.PieceType.Magnet)
+            else if (piece.Type == pType.Magnet)
             {
                 var magnet = Instantiate(configuration.magnetPrefab, pieceTransform);
                 magnet.Setup(fieldAnchorMin, fieldAnchorMax, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
                 draggablePiece = magnet;
             }
-            else if (piece.Type == Piece.PieceType.Player)
+            else if (piece.Type == pType.Player)
             {
                 var player = Instantiate(configuration.playerPrefab, pieceTransform);
                 player.Setup(fieldAnchorMin, fieldAnchorMax, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
                 draggablePiece = player;
             }
+            else if (piece.Type == pType.Door)
+            {
+                var door = Instantiate(configuration.doorPrefab, pieceTransform);
+                door.Setup(fieldAnchorMin, fieldAnchorMax, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
+                draggablePiece = door;
+            }
+            else if (piece.Type == pType.Hole)
+            {
+                var lockObj = Instantiate(configuration.lockPrefab, pieceTransform);
+                lockObj.Setup(fieldAnchorMin, fieldAnchorMax, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
+                draggablePiece = lockObj;
+            }
             else
             {
                 return null;
             }
-            Place(draggablePiece, field);
+            var position = Place(draggablePiece, field);
+            if(position == null)
+            {
+                Destroy(draggablePiece.gameObject); 
+                return null;
+            }
             return draggablePiece;
         }
         
@@ -110,9 +122,6 @@ namespace MagnetGame
                     MonoField newField = MonoField.Instantiate(configuration.fieldPrefab, fieldTransform);
                     newField.name = "Field(" + x + ", " + y + ")"; 
                     
-                    // Positioning
-                    //Vector2 fieldPosition = new Vector2(x*fieldWidth, (Rows-y-1)*fieldHeight) + fieldOriginPoint;
-
                     // Anchoring
                     Vector2 minAnchor = new Vector2(x/(float)Columns, y/(float)Rows);
                     Vector2 maxAnchor = new Vector2((x + 1)/(float)Columns, (y + 1)/(float)Rows);

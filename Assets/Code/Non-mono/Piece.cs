@@ -12,6 +12,8 @@ namespace MagnetGame
             Hole,
             Endpoint,
             Magnet,
+            Door,
+            Lock,
             Player
         }
         public PieceType Type;

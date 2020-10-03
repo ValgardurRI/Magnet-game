@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e482de6ff18cc1340b4a03f9ea411721, type: 3}
   m_Name: 2PlayerLevel
   m_EditorClassIdentifier: 
-  LevelWidth: 6
-  LevelHeight: 6
+  LevelWidth: 10
+  LevelHeight: 10
   Fields:
-  - Type: 4
+  - Type: 0
     MagnetStrength: 1
     MagnetPolarity: 1
   - Type: 0
@@ -50,11 +50,62 @@ MonoBehaviour:
     MagnetPolarity: 0
   - Type: 0
     MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
     MagnetPolarity: 1
-  - Type: 1
+  - Type: 0
+    MagnetStrength: 7
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 3
+    MagnetPolarity: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - Type: 1
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
   - Type: 0
@@ -66,18 +117,159 @@ MonoBehaviour:
   - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - Type: 5
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - Type: 1
+  - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
-  - Type: 1
+  - Type: 0
     MagnetStrength: 0
-    MagnetPolarity: 0
-  - Type: 4
-    MagnetStrength: 1
     MagnetPolarity: 1
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 1
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 2
+    MagnetPolarity: 1
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 1
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 7
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 7
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
   - Type: 0
     MagnetStrength: 0
     MagnetPolarity: 0
@@ -118,9 +310,9 @@ MonoBehaviour:
     MagnetStrength: 0
     MagnetPolarity: 0
   - Type: 0
-    MagnetStrength: 10
-    MagnetPolarity: 1
-  - Type: 4
-    MagnetStrength: 1
-    MagnetPolarity: 1
+    MagnetStrength: 0
+    MagnetPolarity: 0
+  - Type: 0
+    MagnetStrength: 0
+    MagnetPolarity: 0
   VisualizationFont: {fileID: 12800000, guid: caa741df5da29f14d97a45cbec461b6b, type: 3}
