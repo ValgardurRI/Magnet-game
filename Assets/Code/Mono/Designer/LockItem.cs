@@ -19,7 +19,7 @@ namespace MagnetGame
 
         private void SetIndicators()
         {
-            transform.Find("Image").GetComponent<Image>().color = polarityStrength > 0 ? colors.PositiveColor : colors.NegativeColor;
+            transform.Find("ColorFill").GetComponent<Image>().color = polarityStrength > 0 ? colors.PositiveColor : colors.NegativeColor;
             GetComponentInChildren<TextMeshProUGUI>().text = ((char)('A' + Mathf.Abs(polarityStrength) - 1)).ToString();
         }
 

@@ -77,7 +77,7 @@ namespace MagnetGame
                 door.Setup(fieldAnchorMin, fieldAnchorMax, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
                 draggablePiece = door;
             }
-            else if (piece.Type == pType.Hole)
+            else if (piece.Type == pType.Lock)
             {
                 var lockObj = Instantiate(configuration.lockPrefab, pieceTransform);
                 lockObj.Setup(fieldAnchorMin, fieldAnchorMax, this, piece, piece.MagnetStrength, piece.MagnetPolarity);
